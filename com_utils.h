@@ -35,7 +35,4 @@ extern uchar* readFrame(uchar *frame);
 extern uchar* handleReceivedPayload(uchar *payload, uchar dataLength);
 
 
-// cmd_ping ?
-// cmd_pong ?
-
 #endif // _CORL8_COM_UTILS_H_
