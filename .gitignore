@@ -23,3 +23,10 @@
 *.hex
 
 corl8
+
+# IDE/Text editor files
+.cproject
+.project
+.settings
+*.sublime-*
+
