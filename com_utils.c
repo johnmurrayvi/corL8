@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 uchar* makeSLCPFrame(uchar *data, uchar dataLength)
@@ -21,7 +22,6 @@ uchar* makeSLCPFrame(uchar *data, uchar dataLength)
     return NULL;
   }
 
-  uchar i;
   uchar *frame, *chksum, *payload;
 
   payload = data;
@@ -42,9 +42,7 @@ uchar* makeSLCPFrame(uchar *data, uchar dataLength)
   frame[1] = SLCP_HEADER_END;
   frame[2] = dataLength;
 
-  for (i = 0; i < dataLength; i++)
-    frame[i+3] = payload[i];
-
+  memcpy(&(frame[3]), payload, dataLength);
 
   frame[frameLength - 1] = *chksum;
 
@@ -114,7 +112,7 @@ uchar* sendSLCPFrame(uchar *payload)
 
 uchar* readSLCPFrame(uchar *frame)
 {
-  uchar i, payloadLength;
+  uchar payloadLength;
   uchar *chksum, *payload;
 
   if ((frame[0] != SLCP_HEADER_BEGIN) || (frame[1] != SLCP_HEADER_END)) {
@@ -140,8 +138,7 @@ uchar* readSLCPFrame(uchar *frame)
 
   payload = (uchar *) malloc(sizeof(uchar) * payloadLength);
 
-  for (i = 0; i < payloadLength; i++)
-    payload[i] = frame[i+3];
+  memcpy(payload, &(frame[3]), payloadLength);
 
   handleReceivedPayload(payload, payloadLength);
 
