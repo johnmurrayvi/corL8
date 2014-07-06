@@ -52,7 +52,7 @@ uchar* makeFrame(uchar *data, uchar dataLength)
   return (uchar *) frame;
 }
 
-uchar* getBGR(uchar red, uchar green, uchar blue, uint16_t* bgr)
+uchar* getBGR_2B(uchar red, uchar green, uchar blue, uint16_t* bgr)
 {
   if (red >= 16)
     fprintf(stderr, "setBGR is clipping extraneous bits from red!\n");
