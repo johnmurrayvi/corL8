@@ -285,6 +285,12 @@ uchar* handleReceivedPayload(uchar *payload, uchar payloadLength)
     case CMD_L8_FRAMEGRAB_RESPONSE:
 
     case CMD_L8_SENSORS_THRESHOLDS_RESPONSE:
+      if (dataLength != CMD_L8_SENSORS_THRESHOLDS_RESPONSE_LENGTH) {
+        *ret = 1;
+      } else {
+        ret = responseSensorThresholds(data);
+      }
+      break;    
 
     case CMD_L8_NOTIFAPPS_SILENCE_RESPONSE:
 
