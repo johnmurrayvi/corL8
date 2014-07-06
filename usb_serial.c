@@ -77,7 +77,7 @@ uchar *initTTY(char *ttyPath)
     return NULL;
   }
 
-  return (uchar *) 1;
+  return (uchar *) 0;
 };
 
 
@@ -85,7 +85,7 @@ uchar *closeTTY()
 {
   close(ttyFD);
 
-  return (uchar *) 1;
+  return (uchar *) 0;
 };
 
 int getTTYFD()
