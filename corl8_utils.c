@@ -67,13 +67,13 @@ uchar* getBGR(uchar red, uchar green, uchar blue, uint16_t* bgr)
   memset(&bgr, 0, sizeof(uint16_t));
 
   // Set blue
-  bgr |= (0xFF0000 & (blue << 4));
+  bgr |= (0x0F00 & (blue << 2));
   
   // Set green
-  bgr |= (0xFF00 & (green << 2));
+  bgr |= (0x00F0 & (green << 1));
 
   // Set red
-  bgr |= (0x00FF & (red << 0));
+  bgr |= (0x000F & (red << 0));
 
   return (uchar *) 0;
 }
