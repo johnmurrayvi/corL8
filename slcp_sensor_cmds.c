@@ -18,7 +18,7 @@ void queryVoltage()
 
   frame = makeQueryFrame(CMD_L8_VOLTAGE_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -53,7 +53,7 @@ void queryTemp()
 
   frame = makeQueryFrame(CMD_L8_TEMP_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -82,7 +82,7 @@ void queryAccel()
 
   frame = makeQueryFrame(CMD_L8_ACC_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -186,7 +186,7 @@ void queryUID()
 
   frame = makeQueryFrame(CMD_L8_UID_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -212,7 +212,7 @@ void queryAmbient()
 
   frame = makeQueryFrame(CMD_L8_AMBIENT_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -255,7 +255,7 @@ void queryProximity()
 
   frame = makeQueryFrame(CMD_L8_PROX_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -298,7 +298,7 @@ void queryVersions()
 
   frame = makeQueryFrame(CMD_L8_VERSIONS_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -343,7 +343,7 @@ void queryButton()
 
   frame = makeQueryFrame(CMD_L8_MIC_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -376,7 +376,7 @@ void queryMic()
 
   frame = makeQueryFrame(CMD_L8_MIC_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -399,7 +399,7 @@ void queryVBUS()
 
   frame = makeQueryFrame(CMD_L8_VBUS_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -425,7 +425,7 @@ void queryMCUTemp()
 
   frame = makeQueryFrame(CMD_L8_MCUTEMP_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -448,7 +448,7 @@ void queryBatCharge()
 
   frame = makeQueryFrame(CMD_L8_BATCHG_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }
@@ -497,7 +497,7 @@ void queryOrientation()
 
   frame = makeQueryFrame(CMD_L8_ORIENTATION_QUERY);
 
-  sendFrame(frame);
+  sendSLCPFrame(frame);
 
   free(frame);
 }

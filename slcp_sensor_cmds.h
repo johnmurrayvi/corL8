@@ -21,7 +21,7 @@
 extern void queryVoltage();
 
 /*!
- * \fn responseVoltage()
+ * \fn uchar* responseVoltage(uchar *data)
  */
 extern uchar* responseVoltage(uchar *data);
 
@@ -37,7 +37,7 @@ extern uchar* responseVoltage(uchar *data);
 extern void queryTemp();
 
 /*!
- * \fn responseTemp()
+ * \fn uchar* responseTemp(uchar *data)
  */
 extern uchar* responseTemp(uchar *data);
 
@@ -53,7 +53,7 @@ extern uchar* responseTemp(uchar *data);
 extern void queryAccel();
 
 /*!
- * \fn responseAccel()
+ * \fn uchar* responseAccel(uchar *data)
  */
 extern uchar* responseAccel(uchar *data);
 
@@ -69,7 +69,7 @@ extern uchar* responseAccel(uchar *data);
 extern void queryUID();
 
 /*!
- * \fn responseUID()
+ * \fn uchar* responseUID(uchar *data)
  */
 extern uchar* responseUID(uchar *data);
 
@@ -85,7 +85,7 @@ extern uchar* responseUID(uchar *data);
 extern void queryAmbient();
 
 /*!
- * \fn responseAmbient()
+ * \fn uchar* responseAmbient(uchar *data)
  */
 extern uchar* responseAmbient(uchar *data);
 
@@ -101,7 +101,7 @@ extern uchar* responseAmbient(uchar *data);
 extern void queryProximity();
 
 /*!
- * \fn responseProximity()
+ * \fn uchar* responseProximity(uchar *data)
  */
 extern uchar* responseProximity(uchar *data);
 
@@ -117,7 +117,7 @@ extern uchar* responseProximity(uchar *data);
 extern void queryVersions();
 
 /*!
- * \fn responseVersions()
+ * \fn uchar* responseVersions(uchar *data)
  */
 extern uchar* responseVersions(uchar *data);
 
@@ -133,7 +133,7 @@ extern uchar* responseVersions(uchar *data);
 extern void queryButton();
 
 /*!
- * \fn responseButton()
+ * \fn uchar* responseButton(uchar *data)
  */
 extern uchar* responseButton(uchar *data);
 
@@ -149,7 +149,7 @@ extern uchar* responseButton(uchar *data);
 extern void queryMic();
 
 /*!
- * \fn responseMic()
+ * \fn uchar* responseMic(uchar *data)
  */
 extern uchar* responseMic(uchar *data);
 
@@ -165,7 +165,7 @@ extern uchar* responseMic(uchar *data);
 extern void queryVBUS();
 
 /*!
- * \fn responseVBUS()
+ * \fn uchar* responseVBUS(uchar *data)
  */
 extern uchar* responseVBUS(uchar *data);
 
@@ -181,7 +181,7 @@ extern uchar* responseVBUS(uchar *data);
 extern void queryMCUTemp();
 
 /*!
- * \fn responseMCUTemp()
+ * \fn uchar* responseMCUTemp(uchar *data)
  */
 extern uchar* responseMCUTemp(uchar *data);
 
@@ -197,7 +197,7 @@ extern uchar* responseMCUTemp(uchar *data);
 extern void queryBatCharge();
 
 /*!
- * \fn responseBatCharge()
+ * \fn uchar* responseBatCharge(uchar *data)
  */
 extern uchar* responseBatCharge(uchar *data);
 
@@ -213,7 +213,7 @@ extern uchar* responseBatCharge(uchar *data);
 extern void queryOrientation();
 
 /*!
- * \fn responseOrientation()
+ * \fn uchar* responseOrientation(uchar *data)
  */
 extern uchar* responseOrientation(uchar *data);
 

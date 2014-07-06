@@ -18,7 +18,7 @@ uchar* sendCMDPING()
 
   frame = makeQueryFrame(CMD_PING);
 
-  ret = sendFrame(frame);
+  ret = sendSLCPFrame(frame);
 
   free(frame);
 

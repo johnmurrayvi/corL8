@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 
-uchar* makeFrame(uchar *data, uchar dataLength)
+uchar* makeSLCPFrame(uchar *data, uchar dataLength)
 {
   if (!data) {
     fprintf(stderr, "No data passed into makeFrame function!\n");
@@ -53,10 +53,11 @@ uchar* makeFrame(uchar *data, uchar dataLength)
 
 uchar* makeQueryFrame(uchar cmd)
 {
-  return makeFrame(&cmd, 1);
+  // TODO: should check to make sure that cmd is a QUERY cmd
+  return makeSLCPFrame(&cmd, 1);
 }
 
-uchar* sendFrame(uchar *payload)
+uchar* sendSLCPFrame(uchar *payload)
 {
   uchar *ret = 0;
   uchar cmd;
@@ -111,7 +112,7 @@ uchar* sendFrame(uchar *payload)
   return ret;
 }
 
-uchar* readFrame(uchar *frame)
+uchar* readSLCPFrame(uchar *frame)
 {
   uchar i, payloadLength;
   uchar *chksum, *payload;
