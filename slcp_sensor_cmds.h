@@ -219,15 +219,42 @@ extern uchar* responseOrientation(uchar *data);
 
 
 /*
- * #define CMD_L8_SET_AUTOROTATE               0x86
- * #define CMD_L8_POWEROFF                     0x9D
- * #define CMD_L8_STATUSLEDS_ENABLE            0x9E
  * #define CMD_L8_NOISE_THRESHOLDS_SET         0x9F
  * #define CMD_L8_PROX_THRESHOLDS_SET          0xA0
  * #define CMD_L8_AMB_THRESHOLDS_SET           0xA1
+ */
+
+/*!
+ * \fn setNoiseThresholds(uint16_t min, uint16_t max);
+ */
+extern uchar* setNoiseThresholds(uint16_t min, uint16_t max);
+
+/*!
+ * \fn setProximityThresholds(uint16_t min, uint16_t max);
+ */
+extern uchar* setProximityThresholds(uint16_t min, uint16_t max);
+
+/*!
+ * \fn setAmbienThresholds(uint16_t min, uint16_t max);
+ */
+extern uchar* setAmbientThresholds(uint16_t min, uint16_t max);
+
+
+/*
  * #define CMD_L8_SENSORS_THRESHOLDS_QUERY     0xA2
  * #define CMD_L8_SENSORS_THRESHOLDS_RESPONSE  0xA3
  */
+
+/*!
+ * \fn querySensorThresholds()
+ */
+extern void querySensorThresholds();
+
+/*!
+ * \fn uchar* responseSensorThresholds(uchar *data)
+ */
+extern uchar* responseSensorThresholds(uchar *data);
+
 
 
 #endif // _CORL8_SLCP_SENSOR_CMDS_H_

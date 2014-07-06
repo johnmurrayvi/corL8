@@ -539,3 +539,103 @@ uchar* responseOrientation(uchar *data)
   return ret;
 }
 
+
+uchar* setNoiseThresholds(uint16_t min, uint16_t max)
+{
+  uchar data[5];
+  uchar *frame;
+
+  data[0] = CMD_L8_NOISE_THRESHOLDS_SET;
+  data[1] = (0xFF & (min >> 2));
+  data[2] = (0xFF & min);
+  data[3] = (0xFF & (max >> 2));
+  data[4] = (0xFF & max);
+
+  frame = makeSLCPFrame((uchar *) &data, 5);
+  if (!frame) return NULL;
+
+  sendSLCPFrame(frame);
+
+  free(frame);
+
+  return (uchar *) 0;
+}
+
+uchar* setProximityThresholds(uint16_t min, uint16_t max)
+{
+  uchar data[5];
+  uchar *frame;
+
+  data[0] = CMD_L8_PROX_THRESHOLDS_SET;
+  data[1] = (0xFF & (min >> 2));
+  data[2] = (0xFF & min);
+  data[3] = (0xFF & (max >> 2));
+  data[4] = (0xFF & max);
+
+  frame = makeSLCPFrame((uchar *) &data, 5);
+  if (!frame) return NULL;
+
+  sendSLCPFrame(frame);
+
+  free(frame);
+
+  return (uchar *) 0;
+}
+
+uchar* setAmbientThresholds(uint16_t min, uint16_t max)
+{
+  uchar data[5];
+  uchar *frame;
+
+  data[0] = CMD_L8_AMB_THRESHOLDS_SET;
+  data[1] = (0xFF & (min >> 2));
+  data[2] = (0xFF & min);
+  data[3] = (0xFF & (max >> 2));
+  data[4] = (0xFF & max);
+
+  frame = makeSLCPFrame((uchar *) &data, 5);
+  if (!frame) return NULL;
+
+  sendSLCPFrame(frame);
+
+  free(frame);
+
+  return (uchar *) 0;
+}
+
+
+void querySensorThresholds()
+{
+  uchar *frame;
+
+  frame = makeQueryFrame(CMD_L8_SENSORS_THRESHOLDS_QUERY);
+
+  sendSLCPFrame(frame);
+
+  free(frame);
+}
+
+uchar* responseSensorThresholds(uchar *data)
+{
+  uint16_t min = 0, max = 0;
+  uchar i;
+
+  printf("Sensor Thresholds:\n");
+
+  for (i = 0; i < 3; i++) {
+    min = 0;
+    max = 0;
+    min |= (0xFF00 & (data[0+(i*4)] << 2)) | (0x00FF & (data[1+(i*4)] << 0));
+    max |= (0xFF00 & (data[2+(i*4)] << 2)) | (0x00FF & (data[3+(i*4)] << 0));
+
+    if (i == 0) printf("  Noise Sensor\n");
+    else if (i == 1) printf("  Proximity Sensor\n");
+    else if (i == 2) printf("  Ambient Sensor\n");
+
+    printf("    Minimum Threshold: %d (of %d)\n", min, 0xFFFF);
+    printf("    Maximum Threshold: %d (of %d)\n", min, 0xFFFF);
+  }
+
+  return (uchar *) 0;
+}
+
