@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> // for memset
 
 
 uchar* makeFrame(uchar *data, uchar dataLength)
@@ -49,5 +50,31 @@ uchar* makeFrame(uchar *data, uchar dataLength)
   frame[frameLength - 1] = *chksum;
 
   return (uchar *) frame;
+}
+
+uchar* getBGR(uchar red, uchar green, uchar blue, uint16_t* bgr)
+{
+  if (red >= 16)
+    fprintf(stderr, "setBGR is clipping extraneous bits from red!\n");
+
+  if (green >= 16)
+    fprintf(stderr, "setBGR is clipping extraneous bits from green!\n");
+
+  if (blue >= 16)
+    fprintf(stderr, "setBGR is clipping extraneous bits from blue!\n");
+
+  // Zero out data
+  memset(&bgr, 0, sizeof(uint16_t));
+
+  // Set blue
+  bgr |= (0xFF0000 & (blue << 4));
+  
+  // Set green
+  bgr |= (0xFF00 & (green << 2));
+
+  // Set red
+  bgr |= (0x00FF & (red << 0));
+
+  return (uchar *) 0;
 }
 
