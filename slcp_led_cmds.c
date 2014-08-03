@@ -90,6 +90,55 @@ uchar* setSuperLED(uchar red, uchar green, uchar blue)
 }
 
 
+uchar* matrixSetSolid(uchar red, uchar green, uchar blue)
+{
+  uchar r = 0, g = 0, b = 0;
+  uchar data[128], i;
+
+  if (red >= 16)
+    fprintf(stderr, "matrixSetSolid is clipping extraneous bits from red!\n");
+
+  if (green >= 16)
+    fprintf(stderr, "matrixSetSolid is clipping extraneous bits from green!\n");
+
+  if (blue >= 16)
+    fprintf(stderr, "matrixSetSolid is clipping extraneous bits from blue!\n");
+
+  r |= (0xF & red);
+  g |= (0xF & green);
+  b |= (0xF & blue);
+
+  data[0] = CMD_L8_MATRIX_SET;
+
+  for (i = 1; i < 128; i += 2) {
+    data[i] = ((0x00 & 0xF0) & b);
+    data[i+1] = ((g << 4) & r);
+  }
+
+  return matrixSet((uchar *) &data);
+}
+
+
+uchar* matrixSet(uchar *matrix)
+{
+  uchar *frame;
+
+  if (matrix[0] != CMD_L8_MATRIX_SET) {
+    fprintf(stderr, "matrixSet received a matrix that didn't have CMD_L8_MATRIX_SET!\n");
+    return NULL;
+  }
+
+  frame = makeSLCPFrame(matrix, 128);
+
+  if (!frame) return NULL;
+
+  sendSLCPFrame(frame);
+
+  free(frame);
+
+  return (uchar *) 0;
+}
+
 
 uchar* matrixOff()
 {

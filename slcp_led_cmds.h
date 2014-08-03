@@ -18,8 +18,11 @@ extern uchar* setSuperLED(uchar red, uchar green, uchar blue);
 
 
 // CMD_L8_MATRIX_SET 0x44
-extern void matrixSetSolid(uchar red, uchar green, uchar blue);
-// extern void matrixSet(uchar *matrix);
+extern uchar* matrixSetSolid(uchar red, uchar green, uchar blue);
+/*!
+ * Must pass 0x0BGR format matrix with CMD_L8_MATRIX_SET as the first byte
+ */
+extern uchar* matrixSet(uchar *matrix);
 
 // CMD_L8_MATRIX_OFF 0x45
 extern uchar* matrixOff();
