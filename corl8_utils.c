@@ -26,10 +26,10 @@ uchar* getBGR_2B(uchar red, uchar green, uchar blue, uint16_t* bgr)
   memset(&bgr, 0, sizeof(uint16_t));
 
   // Set blue
-  bgr |= (0x0F00 & (blue << 2));
+  bgr |= (0x0F00 & (blue << 8));
   
   // Set green
-  bgr |= (0x00F0 & (green << 1));
+  bgr |= (0x00F0 & (green << 4));
 
   // Set red
   bgr |= (0x000F & (red << 0));
