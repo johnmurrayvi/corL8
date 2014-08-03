@@ -91,17 +91,19 @@ uchar* setSuperLED(uchar red, uchar green, uchar blue)
 
 
 
-void matrixOff()
+uchar* matrixOff()
 {
   uchar *frame;
 
   frame = makeQueryFrame(CMD_L8_MATRIX_OFF);
 
-  if (!frame) return;
+  if (!frame) return NULL;
 
   sendSLCPFrame(frame);
 
   free(frame);
+
+  return (uchar *) 0;
 }
 
 

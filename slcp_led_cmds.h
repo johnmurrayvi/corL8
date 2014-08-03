@@ -22,7 +22,7 @@ extern void matrixSetSolid(uchar red, uchar green, uchar blue);
 // extern void matrixSet(uchar *matrix);
 
 // CMD_L8_MATRIX_OFF 0x45
-extern void matrixOff();
+extern uchar* matrixOff();
 
 
 // CMD_L8_STATUSLEDS_ENABLE 0x9E
