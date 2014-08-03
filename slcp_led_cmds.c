@@ -57,7 +57,7 @@ uchar* setLED(uchar x, uchar y, uchar red, uchar green, uchar blue)
 uchar* setSuperLED(uchar red, uchar green, uchar blue)
 {
   uchar r = 0, g = 0, b = 0;
-  uchar data[6];
+  uchar data[4];
   uchar *frame;
 
   if (red >= 16)
