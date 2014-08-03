@@ -29,10 +29,10 @@ uchar* responseVoltage(uchar *data)
   uint8_t batPerc = 0;
   uchar *ret = 0;
 
-  // mVRaw |= (0xFF00 & (data[0] << 2));
+  // mVRaw |= (0xFF00 & (data[0] << 8));
   // mVRaw |= (0x00FF & data[1]);
 
-  mVRaw = ((0xFF00 & (data[0] << 2)) | (0x00FF & data[1]));
+  mVRaw = ((0xFF00 & (data[0] << 8)) | (0x00FF & data[1]));
 
   batPerc = (0xFF & data[2]);
 
@@ -63,10 +63,10 @@ uchar* responseTemp(uchar *data)
   uint16_t degRaw;
   double degC;
 
-  // degRaw |= (0xFF00 & (data[0] << 2));
+  // degRaw |= (0xFF00 & (data[0] << 8));
   // degRaw |= (0x00FF & data[1]);
 
-  degRaw = ((0xFF00 & (data[0] << 2)) | (0x00FF & data[1]));
+  degRaw = ((0xFF00 & (data[0] << 8)) | (0x00FF & data[1]));
 
   degC = ((degRaw / 100.0) + (degRaw % 100));
 
@@ -223,7 +223,7 @@ uchar* responseAmbient(uchar *data)
   uchar ambPerc, notifFlag;
   uchar *ret = 0;
 
-  ambRaw = ((0xFF00 & (data[0] << 2)) | (0x00FF & data[1]));
+  ambRaw = ((0xFF00 & (data[0] << 8)) | (0x00FF & data[1]));
 
   ambPerc = (0xFF & data[2]);
   notifFlag = (0xFF & data[3]);
@@ -266,7 +266,7 @@ uchar* responseProximity(uchar *data)
   uchar proxPerc, notifFlag;
   uchar *ret = 0;
 
-  proxRaw = ((0xFF00 & (data[0] << 2)) | (0x00FF & data[1]));
+  proxRaw = ((0xFF00 & (data[0] << 8)) | (0x00FF & data[1]));
 
   proxPerc = (0xFF & data[2]);
   notifFlag = (0xFF & data[3]);
@@ -308,29 +308,29 @@ uchar* responseVersions(uchar *data)
   // uint32_t fwVer = 0;
   // uint16_t hwVer = 0, bldrVer = 0, umemVer = 0;
 
-  // fwVer = ((0x00FF0000 & (data[0] << 4)) |
-  //          (0x0000FF00 & (data[1] << 2)) |
+  // fwVer = ((0x00FF0000 & (data[0] << 16)) |
+  //          (0x0000FF00 & (data[1] << 8)) |
   //          (0x000000FF & (data[2] << 0)));
 
-  // hwVer = ((0xFF00 & (data[3] << 2)) | (0x00FF & data[4]));
+  // hwVer = ((0xFF00 & (data[3] << 8)) | (0x00FF & data[4]));
   
-  // bldrVer = ((0xFF00 & (data[5] << 2)) | (0x00FF & data[6]));
+  // bldrVer = ((0xFF00 & (data[5] << 8)) | (0x00FF & data[6]));
 
-  // umemVer = ((0xFF00 & (data[7] << 2)) | (0x00FF & data[8]));
+  // umemVer = ((0xFF00 & (data[7] << 8)) | (0x00FF & data[8]));
 
   printf("L8 Version Info:\n");
 
-  printf("  Firmware Version: %d.%d.%d\n", (0x00FF0000 & (data[0] << 4)),
-                                           (0x0000FF00 & (data[1] << 2)),
+  printf("  Firmware Version: %d.%d.%d\n", (0x00FF0000 & (data[0] << 16)),
+                                           (0x0000FF00 & (data[1] << 8)),
                                            (0x000000FF & (data[2] << 0)));
 
-  printf("  Hardware Version: %d.%d\n", (0xFF00 & (data[3] << 2)),
+  printf("  Hardware Version: %d.%d\n", (0xFF00 & (data[3] << 8)),
                                         (0x00FF & (data[4] << 0)));
 
-  printf("  Bootloader Version: %d.%d\n", (0xFF00 & (data[5] << 2)),
+  printf("  Bootloader Version: %d.%d\n", (0xFF00 & (data[5] << 8)),
                                           (0x00FF & (data[6] << 0)));
 
-  printf("  User Memory Version: %d.%d\n", (0xFF00 & (data[7] << 2)),
+  printf("  User Memory Version: %d.%d\n", (0xFF00 & (data[7] << 8)),
                                            (0x00FF & (data[8] << 0)));
 
   return (uchar *) 0;
@@ -385,7 +385,7 @@ uchar* responseMic(uchar *data)
 {
   uint16_t noiseRaw;
 
-  noiseRaw = ((0xFF00 & (data[0] << 2)) | (0x00FF & data[1]));
+  noiseRaw = ((0xFF00 & (data[0] << 8)) | (0x00FF & data[1]));
 
   printf("Noise sensor: %d (of %d)\n", noiseRaw, 0xFFFF);
 
@@ -408,7 +408,7 @@ uchar* responseVBUS(uchar *data)
 {
   uint16_t mVRaw = 0;
 
-  // mVRaw |= (0xFF00 & (data[0] << 2));
+  // mVRaw |= (0xFF00 & (data[0] << 8));
   // mVRaw |= (0x00FF & data[1]);
 
   mVRaw = ((0xFF00 & data[0]) | (0x00FF & data[1]));
@@ -434,7 +434,7 @@ uchar* responseMCUTemp(uchar *data)
 {
   uint16_t degC;
 
-  degC = ((0xFF00 & (data[0] << 2)) | (0x00FF & data[1]));
+  degC = ((0xFF00 & (data[0] << 8)) | (0x00FF & data[1]));
 
   printf("MCU Temperature: %d\n", degC);
 
@@ -546,9 +546,9 @@ uchar* setNoiseThresholds(uint16_t min, uint16_t max)
   uchar *frame;
 
   data[0] = CMD_L8_NOISE_THRESHOLDS_SET;
-  data[1] = (0xFF & (min >> 2));
+  data[1] = ((0xFF00 & min) >> 8);
   data[2] = (0xFF & min);
-  data[3] = (0xFF & (max >> 2));
+  data[3] = ((0xFF00 & max) >> 8);
   data[4] = (0xFF & max);
 
   frame = makeSLCPFrame((uchar *) &data, 5);
@@ -567,9 +567,9 @@ uchar* setProximityThresholds(uint16_t min, uint16_t max)
   uchar *frame;
 
   data[0] = CMD_L8_PROX_THRESHOLDS_SET;
-  data[1] = (0xFF & (min >> 2));
+  data[1] = ((0xFF00 & min) >> 8);
   data[2] = (0xFF & min);
-  data[3] = (0xFF & (max >> 2));
+  data[3] = ((0xFF00 & max) >> 8);
   data[4] = (0xFF & max);
 
   frame = makeSLCPFrame((uchar *) &data, 5);
@@ -588,9 +588,9 @@ uchar* setAmbientThresholds(uint16_t min, uint16_t max)
   uchar *frame;
 
   data[0] = CMD_L8_AMB_THRESHOLDS_SET;
-  data[1] = (0xFF & (min >> 2));
+  data[1] = ((0xFF00 & min) >> 8);
   data[2] = (0xFF & min);
-  data[3] = (0xFF & (max >> 2));
+  data[3] = ((0xFF00 & max) >> 8);
   data[4] = (0xFF & max);
 
   frame = makeSLCPFrame((uchar *) &data, 5);
@@ -625,8 +625,8 @@ uchar* responseSensorThresholds(uchar *data)
   for (i = 0; i < 3; i++) {
     min = 0;
     max = 0;
-    min |= (0xFF00 & (data[0+(i*4)] << 2)) | (0x00FF & (data[1+(i*4)] << 0));
-    max |= (0xFF00 & (data[2+(i*4)] << 2)) | (0x00FF & (data[3+(i*4)] << 0));
+    min |= (0xFF00 & (data[0+(i*4)] << 8)) | (0x00FF & (data[1+(i*4)] << 0));
+    max |= (0xFF00 & (data[2+(i*4)] << 8)) | (0x00FF & (data[3+(i*4)] << 0));
 
     if (i == 0) printf("  Noise Sensor\n");
     else if (i == 1) printf("  Proximity Sensor\n");
